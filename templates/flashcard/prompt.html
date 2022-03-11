@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h3> Time to Study! </h3>
+
+<a href={% url 'deck_list' %}> Back to Deck List</a>
+
+<div>
+    <p>{{ flashcard.prompt }}</p>
+</div>
+<div>
+<!--this div will hold options to flip the card and to go to the next card -->
+    <a href={% url 'answer' %}>flip</a>
+    <a href={% url 'prompt' %}>next</a>
+</div>
+
+{% endblock content %}

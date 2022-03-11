@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 def homepage(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("home.html")
 
-    return render(request, "deck_list")
+    return render(request, "deck_list.html")
 
 
 @login_required
@@ -20,7 +20,7 @@ def show_flashcards(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
     flashcards = deck.flashcards.all()
 
-    return render(request, "show_flashcards", {"deck": deck, "flashcards": flashcards})
+    return render(request, "show_flashcards.html", {"deck": deck, "flashcards": flashcards})
 
 
 @login_required
@@ -34,9 +34,9 @@ def add_deck(request, pk):
             deck = form.save(commit=False)
             deck.user = user
             deck.save()
-            return redirect(to="deck_list", pk=user.pk)
+            return redirect(to="deck_list.html", pk=user.pk)
 
-    return render(request, "add_deck", {"form": form, "deck": deck})
+    return render(request, "add_deck.html", {"form": form, "deck": deck})
 
 
 @login_required
@@ -49,10 +49,10 @@ def edit_deck(request, slug, pk):
             deck = form.save(commit=False)
             deck.user = user
             deck.save()
-            return redirect(to="deck_list", slug)
+            return redirect(to="deck_list.html")
     else:
         form = DeckForm(instance=deck)
-    return render(request, "edit_deck", {'form': form, "deck": deck})
+    return render(request, "edit_deck.html", {'form': form, "deck": deck})
 
 
 @login_required
@@ -60,9 +60,9 @@ def delete_deck(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     if request.method == 'POST':
         deck.delete()
-        return redirect(to='deck_list')
+        return redirect(to='deck_list.html')
 
-    return render(request, "delete_deck",
+    return render(request, "delete_deck.html",
                   {"deck": deck})
 
 
@@ -77,9 +77,9 @@ def add_flashcard(request, slug):
             flashcard = form.save(commit=False)
             flashcard.deck = deck.slug
             deck.save()
-            return redirect(to="show_flashcards")
+            return redirect(to="show_flashcards.html")
 
-    return render(request, "add_flashcard", {"form": form, "deck": deck})
+    return render(request, "add_flashcard.html", {"form": form, "deck": deck})
 
 
 @login_required
@@ -93,10 +93,10 @@ def edit_flashcard(request, pk, slug):
             flashcard = form.save(commit=False)
             flashcard.deck = deck.slug
             flashcard.save()
-            return redirect(to="show_flashcards", pk)
+            return redirect(to="show_flashcards.html")
     else:
         form = DeckForm(instance=flashcard)
-    return render(request, "edit_flashcard", {'form': form, "deck": deck, "flashcard": flashcard})
+    return render(request, "edit_flashcard.html", {'form': form, "deck": deck, "flashcard": flashcard})
 
 
 @login_required
@@ -105,9 +105,9 @@ def delete_flashcard(request, pk, slug):
     flashcard = get_object_or_404(Deck, pk=pk)
     if request.method == 'POST':
         flashcard.delete()
-        return redirect(to='show_flashcards')
+        return redirect(to='show_flashcards.html')
 
-    return render(request, "delete_deck",
+    return render(request, "delete_deck.html",
                   {"deck": deck, "flashcard": flashcard})
 
 
@@ -115,14 +115,14 @@ def delete_flashcard(request, pk, slug):
 def show_prompt(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)
-    return render(request, "show_prompt", {"flashcard": flashcard, "deck": deck})
+    return render(request, "show_prompt.html", {"flashcard": flashcard, "deck": deck})
 
 
 @login_required
 def show_answer(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)
-    return render(request, "show_prompt", {"flashcard": flashcard, "deck": deck})
+    return render(request, "show_answer.html", {"flashcard": flashcard, "deck": deck})
 
 
 # class FlaschCardListView(LoginRequiredMixin, ListView):

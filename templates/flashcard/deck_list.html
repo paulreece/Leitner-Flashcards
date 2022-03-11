@@ -9,9 +9,9 @@
       <p>{{ deck.name }} </p>
       <p>{{ deck.description }} </p>
 <div>
-      <a href={% url 'edit_deck' %}>Edit Deck</a>
-      <a href={% url 'delete_deck' pk=deck.pk%}>Delete Deck</a>
-      <a href={% url 'study_flashcards' %}>Study Flashcards</a>
+      <a href={% url 'edit_deck' slug=deck.slug%}>Edit Deck</a>
+      <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
+      <a href={% url 'show_prompt' %}>Study Flashcards</a>
     </div>
  </div>
   {% empty %}

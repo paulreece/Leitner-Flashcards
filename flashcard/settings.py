@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "registration",
+    "flashcardsapp",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,13 +138,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CACHES = {
-    # Read os.environ['CACHE_URL'] and raises
-    # ImproperlyConfigured exception if not found.
-    #
-    # The cache() method is an alias for cache_url().
-    'default': env.cache(),
-
-    # read os.environ['REDIS_URL']
-    'redis': env.cache_url('REDIS_URL')
-}
+# CACHES = {
+#     # Read os.environ['CACHE_URL'] and raises
+#     # ImproperlyConfigured exception if not found.
+#     #
+#     # The cache() method is an alias for cache_url().
+#     'default': env.cache(),
+# }
+# # read os.environ['REDIS_URL']
+# #     'redis': env.cache_url('REDIS_URL'),
+# #
+AUTH_USER_MODEL = 'flashcardsapp.User'

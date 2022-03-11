@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-  <form action="{% url 'delete_deck' pk=deck.pk %}" method="POST">
+  <form action="{% url 'delete_deck' slug=deck.slug %}" method="POST">
     {% csrf_token %}
     <p>Are you sure you want to delete <span>{{ deck.name }}</span>?</p>
     <div>

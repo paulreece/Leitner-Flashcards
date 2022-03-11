@@ -15,8 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from flashcardsapp import views as flash_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    path("", flash_views.homepage, name="homepage"),
+    path("decks", flash_views.homepage, name="deck_list"),
+    path("decks/add/", flash_views.add_deck, name="add_deck"),
+    path("decks/<slug:slug>/edit/", flash_views.edit_deck, name="edit_deck"),
+    path("decks/<slug:slug>/delete", flash_views.delete_deck, name= "delete_deck"),
+    path("decks/<slug:slug>", flash_views.show_flashcards, name="show_flashcards"),
+    path("decks/<slug:slug>/add/",
+         flash_views.add_flashcard, name="add_flashcard"),
+    path("decks/<slug:slug>/<int:pk>/edit/",
+         flash_views.edit_flashcard, name="edit_flashcard"),
+    path("decks/<slug:slug>/<int:pk>/delete/",
+         flash_views.delete_flashcard, name="delete_flashcard"),
+    path("decks/<slug:slug>/<int:pk>",
+         flash_views.show_prompt, name="show_prompt"),
+    path("decks/<slug:slug>/<int:pk>",
+         flash_views.show_answer, name="show_answer"),
+
 ]

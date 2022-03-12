@@ -63,7 +63,7 @@ ROOT_URLCONF = 'flashcard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,3 +149,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # #     'redis': env.cache_url('REDIS_URL'),
 # #
 AUTH_USER_MODEL = 'flashcardsapp.User'
+ACCOUNT_ACTIVATION_DAYS = 100
+
+LOGIN_REDIRECT_URL = 'deck_list'

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Album</h1>
+
+<div>
+<form action="{% url 'edit_deck' slug=deck.slug %}" method="POST">
+    {% csrf_token %}
+    <div>
+    <label for="{{form.name.id_for_label}}">{{ form.name.label }}</label>
+    <input type="text" name={{form.name.html_name}} id="deck-title-input" value="{{deck.name }}">
+    </div>
+    <div>
+    <label for="{{form.description.id_for_label}}">{{form.description.label }}</label>
+    {{ form.description.as_widget }}
+    </div>
+    <div class="mt3">
+    <button type="submit">Save changes</button>
+    </div>
+</form>
+
+<section> 
+    <!-- this section should display all of the flashcards, and edit the flashcard -->
+    {% for flashcard in flashcards %}
+    <div>
+        <p>{{ flashcard.prompt }} </p>
+        <p>{{ flashcard.answer }} </p>
+<div>
+        <a href={% url 'edit_flashcard' %}>Edit Flashcard</a>
+        <a href={% url 'delete_flashcard' pk=flashcard.pk%}>Delete Flashcard</a>
+        
+    </div>
+</div>
+    {% endfor %}
+</section>
+
+<section>
+    <!-- this section should let you add a flashcard,study this deck -->
+    <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
+    <a href={% url 'add_flashcard' %}>Add Flashcard</a>
+    <a href={% url 'show_prompt' %}>Study Flashcards</a>
+</section>
+
+</div>
+{% endblock content%}

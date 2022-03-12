@@ -3,20 +3,29 @@
 {% block content %}
 
 <section>
-  <h1>All Flashcard Decks</h1>
+ <div class="pb5"><h1>All Flashcard Decks</h1></div> 
   {% for deck in decks %}
-  <div>
-      <p>{{ deck.name }} </p>
+  <div flex felx-wrap>
+  <div class="box w5 h-75 pb5 pt4">
+      <p class="f3 lh-copy">{{ deck.name }} </p>
       <p>{{ deck.description }} </p>
+<<<<<<< HEAD
 <div>
       <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %}>Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
       <a href={% url 'show_flashcards' slug=deck.slug %}>Show Flashcards</a>
       <a href={% url 'show_prompt' deck.slug flashcards.id%}>Study Flashcards</a>
+=======
+<div class="pt4">
+      <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %} class="db">Edit Deck</a>
+      <a href={% url 'delete_deck' slug=deck.slug%} class="db">Delete Deck</a>
+      <a href={% url 'show_flashcards' slug=deck.slug %} class="db">Show Flashcards</a>
+>>>>>>> main
 
     
     </div>
  </div>
+</div>
   {% empty %}
   <h2>Sorry, there are no results for that search term.</h2>
   {% endfor %}

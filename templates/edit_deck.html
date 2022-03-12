@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Edit Album</h1>
+<h1>Edit Deck</h1>
 
-<div>
+<div class="control">
 <form action="{% url 'edit_deck' slug=deck.slug pk=user.pk %}" method="POST">
     {% csrf_token %}
-    <div>
+    <div class="form-field mt3">
     <label for="{{form.name.id_for_label}}">{{ form.name.label }}</label>
-    <input type="text" name={{form.name.html_name}} id="deck-title-input" value="{{deck.name }}">
+    <input class="input" type="text" name={{form.name.html_name}} id="deck-title-input" value="{{deck.name }}">
     </div>
-    <div>
+    <div class="form-field mt3">
     <label for="{{form.description.id_for_label}}">{{form.description.label }}</label>
-    {{ form.description.as_widget }}
-    </div>
+    <input class="input" type="text" name={{form.description.html_name}} id="deck-title-input" value="{{deck.description }}">
+    <!-- {{ form.description.as_widget }} -->
+    </div>      
     <div class="mt3">
     <button type="submit">Save changes</button>
     </div>

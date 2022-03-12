@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Edit Album</h1>
+<h1>Edit FlashCard</h1>
 
 <div>
-<form action="{% url 'edit_flashcard' pk=flashcard.pk %}" method="POST">
+<form action="{% url 'edit_flashcard' pk=flashcard.pk slug=deck.slug %}" method="POST">
     {% csrf_token %}
     <div>
-    <label for="{{form.name.id_for_label}}">{{ form.name.label }}</label>
-    <input type="text" name={{form.name.html_name}} id="flashcard-prompt-input" value="{{flashcard.prompt}}">
+    <div>Prompt:<input type="text" name={{form.name.html_name}} id="flashcard-prompt-input" value="{{flashcard.prompt}}"></div>
+    <div>Answer:<input type="text" name={{form.name.html_name}} id="flashcard-answer-input" value="{{flashcard.answer}}"></div>
     </div>
     <div>
     <label for="{{form.answer.id_for_label}}">{{form.answer.label }}</label>

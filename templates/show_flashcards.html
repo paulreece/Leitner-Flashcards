@@ -3,21 +3,25 @@
 {% block content %}
 
 <section>
-  <h1>All Flashcards in your deck</h1>
+  <div class="pb5"><h1>All Flashcards in your deck</h1></div>
   {% for flashcard in flashcards %}
-  <div>
-      <p>{{ flashcard.prompt }} </p>
+  <div class="box w5 h-75 pb5 pt4">
+      <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
       <p>{{ flashcard.answer }} </p>
 <div>
-      <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%}>Edit Flashcard</a>
-      <a href={% url 'delete_flashcard' slug=deck.slug pk=flashcard.pk%}>Delete Flashcard</a>
+      <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%} class="db">Edit Flashcard</a>
+      <a href={% url 'delete_flashcard' slug=deck.slug pk=flashcard.pk%} class="db">Delete Flashcard</a>
     
     </div>
  </div>
  {% endfor %}
 </section>
 
-<section>
+<section class="pt4">
+
   <a href={% url 'add_deck' pk=user.pk%}>Add a New Deck</a>
+  
 </section>
 {% endblock content %}
+
+  <!-- <a href={% url 'add_flashcard' pk=user.pk%}>Add a New Flashcard</a> -->

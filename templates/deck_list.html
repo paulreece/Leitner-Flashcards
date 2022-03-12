@@ -12,6 +12,7 @@
       <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %}>Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
       <a href={% url 'show_flashcards' slug=deck.slug %}>Show Flashcards</a>
+      <a href={% url 'show_prompt' slug=deck.slug pk=flashcard.pk%}>Study Flashcards</a>
 
     
     </div>
@@ -26,4 +27,3 @@
 </section>
 {% endblock content %}
 
-<!-- <a href={% url 'show_prompt' slug=deck.slug pk=flashcard.pk%}>Study Flashcards</a> -->

@@ -13,8 +13,8 @@
 </div>
 <div >
     {% if flashcards %}
-      <p class = 'question'>{{ flashcards }}</p>
-      <p class = 'answer'>{{ flashcards.flash_answer }}</p>
+      <p class = 'question'>{{ flashcards.prompt }}</p>
+      <p class = 'answer'>{{ flashcards.answer }}</p>
       <!-- Here we link to the 'flashcard' view, and pass it the ID of the next card in the sequence -->
       <a href="{% url 'flashcard' flashcards.get_next.id %}">Next flashcard</a>
       {% else %}

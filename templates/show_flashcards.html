@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section>
+  <h1>All Flashcards in your deck</h1>
+  {% for flashcard in flashcards %}
+  <div>
+      <p>{{ flashcard.prompt }} </p>
+      <p>{{ flashcard.answer }} </p>
+<div>
+      <a href={% url 'edit_flashcard' slug=deck.slug%}>Edit Flashcard</a>
+      <a href={% url 'delete_flashcard' slug=deck.slug%}>Delete Flashcard</a>
+    
+    </div>
+ </div>
+</section>
+
+<section>
+  <a href={% url 'add_deck' %}>Add a New Deck</a>
+</section>
+{% endblock content %}

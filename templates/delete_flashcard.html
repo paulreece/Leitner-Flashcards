@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-  <form action="{% url 'delete_flashcard' pk=flashcard.pk %}" method="POST">
+  <form action="{% url 'delete_flashcard' slug=deck.slug pk=flashcard.pk %}" method="POST">
     {% csrf_token %}
     <p>Are you sure you want to delete <span>{{ flashcard.prompt }}</span>?</p>
     <div>

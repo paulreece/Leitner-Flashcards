@@ -4,7 +4,7 @@
 <h1>Edit Album</h1>
 
 <div>
-<form action="{% url 'edit_deck' slug=deck.slug %}" method="POST">
+<form action="{% url 'edit_deck' slug=deck.slug pk=user.pk %}" method="POST">
     {% csrf_token %}
     <div>
     <label for="{{form.name.id_for_label}}">{{ form.name.label }}</label>
@@ -37,9 +37,11 @@
 <section>
     <!-- this section should let you add a flashcard,study this deck -->
     <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
-    <a href={% url 'add_flashcard' %}>Add Flashcard</a>
-    <a href={% url 'show_prompt' %}>Study Flashcards</a>
+    <a href={% url 'add_flashcard' slug=deck.slug%}>Add Flashcard</a>
+    
 </section>
 
 </div>
 {% endblock content%}
+
+<!-- <a href={% url 'show_prompt' %}>Study Flashcards</a> -->

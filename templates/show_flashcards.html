@@ -9,14 +9,15 @@
       <p>{{ flashcard.prompt }} </p>
       <p>{{ flashcard.answer }} </p>
 <div>
-      <a href={% url 'edit_flashcard' slug=deck.slug%}>Edit Flashcard</a>
-      <a href={% url 'delete_flashcard' slug=deck.slug%}>Delete Flashcard</a>
+      <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%}>Edit Flashcard</a>
+      <a href={% url 'delete_flashcard' slug=deck.slug pk=flashcard.pk%}>Delete Flashcard</a>
     
     </div>
  </div>
+ {% endfor %}
 </section>
 
 <section>
-  <a href={% url 'add_deck' %}>Add a New Deck</a>
+  <a href={% url 'add_deck' pk=user.pk%}>Add a New Deck</a>
 </section>
 {% endblock content %}

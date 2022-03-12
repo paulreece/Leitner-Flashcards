@@ -38,3 +38,15 @@ class FlashCard(models.Model):
     correct = models.BooleanField(default=True)
     missed = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now_add=datetime.now)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.prompt
+
+    def get_next(self):
+        next = FlashCard.objects.filter(id__gt=self.id).order_by('?').first()
+        if next:
+            return next
+        # If the current card is the last one, return the first card in the deck
+        else:
+            return FlashCard.objects.all().order_by('id').first()

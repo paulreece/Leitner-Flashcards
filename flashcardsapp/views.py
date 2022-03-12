@@ -1,3 +1,4 @@
+from curses import flash
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponseRedirect
@@ -27,7 +28,7 @@ def deck_list(request):
 @login_required
 def show_flashcards(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
-    flashcards = deck.flashcards.all()
+    flashcards = FlashCard.objects.all().filter(flashcard_deck_id=deck.id)
 
     return render(request, "show_flashcards.html", {"deck": deck, "flashcards": flashcards})
 
@@ -45,7 +46,7 @@ def add_deck(request, pk):
             deck.save()
             return redirect(to="deck_list.html", pk=user.pk)
 
-    return render(request, "add_deck.html", {"form": form, "deck": deck})
+    return render(request, "add_deck.html", {"form": form, "user": user})
 
 
 @login_required
@@ -61,12 +62,12 @@ def edit_deck(request, slug, pk):
             return redirect(to="deck_list.html")
     else:
         form = DeckForm(instance=deck)
-    return render(request, "edit_deck.html", {'form': form, "deck": deck})
+    return render(request, "edit_deck.html", {'form': form, "deck": deck, "user": user})
 
 
 @login_required
-def delete_deck(request, pk):
-    deck = get_object_or_404(Deck, pk=pk)
+def delete_deck(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
     if request.method == 'POST':
         deck.delete()
         return redirect(to='deck_list.html')
@@ -111,12 +112,12 @@ def edit_flashcard(request, pk, slug):
 @login_required
 def delete_flashcard(request, pk, slug):
     deck = get_object_or_404(Deck, slug=slug)
-    flashcard = get_object_or_404(Deck, pk=pk)
+    flashcard = get_object_or_404(FlashCard, pk=pk)
     if request.method == 'POST':
         flashcard.delete()
         return redirect(to='show_flashcards.html')
 
-    return render(request, "delete_deck.html",
+    return render(request, "delete_flashcard.html",
                   {"deck": deck, "flashcard": flashcard})
 
 

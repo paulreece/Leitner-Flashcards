@@ -14,9 +14,9 @@ class User(AbstractUser):
 class Deck(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
-    # deck_user = models.ForeignKey(
-    #     User, on_delete=models.CASCADE, null=True, related_name="deck_user", db_column='deck_user',
-    # )
+    deck_user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="deck_user", db_column='deck_user',
+    )
     flashcard = models.ForeignKey(
         "Flashcard", on_delete=models.CASCADE, null=True, blank=True, related_name="flashcard",
     )

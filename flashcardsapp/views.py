@@ -15,6 +15,15 @@ def homepage(request):
     return render(request, "home.html")
 
 
+@login_required(login_url="auth_login")
+def deck_list(request):
+    decks = Deck.objects.all()
+    return render(
+        request, "deck_list.html", {
+            "decks": decks}
+    )
+
+
 @login_required
 def show_flashcards(request, slug):
     deck = get_object_or_404(Deck, slug=slug)

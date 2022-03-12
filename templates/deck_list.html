@@ -11,7 +11,7 @@
 <div>
       <a href={% url 'edit_deck' slug=deck.slug%}>Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
-      <a href={% url 'show_prompt' %}>Study Flashcards</a>
+    
     </div>
  </div>
   {% empty %}
@@ -23,3 +23,5 @@
   <a href={% url 'add_deck' %}>Add a New Deck</a>
 </section>
 {% endblock content %}
+
+  <!-- <a href={% url 'show_prompt' %}>Study Flashcards</a> -->

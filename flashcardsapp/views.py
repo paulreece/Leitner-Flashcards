@@ -19,13 +19,14 @@ def homepage(request):
 @login_required(login_url="auth_login")
 def deck_list(request):
     decks = Deck.objects.all()
+    flashcards = FlashCard.objects.order_by('?').first()
     return render(
         request, "deck_list.html", {
-            "decks": decks}
+            "decks": decks, "flashcards": flashcards}
     )
 
 
-@login_required
+@ login_required
 def show_flashcards(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
     flashcards = FlashCard.objects.all().filter(flashcard_deck_id=deck.id)
@@ -33,7 +34,7 @@ def show_flashcards(request, slug):
     return render(request, "show_flashcards.html", {"deck": deck, "flashcards": flashcards})
 
 
-@login_required
+@ login_required
 def add_deck(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'GET':
@@ -49,7 +50,7 @@ def add_deck(request, pk):
     return render(request, "add_deck.html", {"form": form, "user": user})
 
 
-@login_required
+@ login_required
 def edit_deck(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
     user = get_object_or_404(User, pk=pk)
@@ -65,7 +66,7 @@ def edit_deck(request, slug, pk):
     return render(request, "edit_deck.html", {'form': form, "deck": deck, "user": user})
 
 
-@login_required
+@ login_required
 def delete_deck(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
     if request.method == 'POST':
@@ -76,7 +77,7 @@ def delete_deck(request, slug):
                   {"deck": deck})
 
 
-@login_required
+@ login_required
 def add_flashcard(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
     if request.method == 'GET':
@@ -85,14 +86,14 @@ def add_flashcard(request, slug):
         form = FlashCardForm(data=request.POST)
         if form.is_valid():
             flashcard = form.save(commit=False)
-            flashcard.deck = deck.slug
-            deck.save()
-            return redirect(to="show_flashcards.html")
+            flashcard.flashcard_deck_id = deck.id
+            flashcard.save()
+            return redirect(to="show_flashcards", slug=deck.slug)
 
     return render(request, "add_flashcard.html", {"form": form, "deck": deck})
 
 
-@login_required
+@ login_required
 def edit_flashcard(request, pk, slug):
     deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)
@@ -109,7 +110,7 @@ def edit_flashcard(request, pk, slug):
     return render(request, "edit_flashcard.html", {'form': form, "deck": deck, "flashcard": flashcard})
 
 
-@login_required
+@ login_required
 def delete_flashcard(request, pk, slug):
     deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)
@@ -121,14 +122,14 @@ def delete_flashcard(request, pk, slug):
                   {"deck": deck, "flashcard": flashcard})
 
 
-@login_required
+@ login_required
 def show_prompt(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
-    flashcard = get_object_or_404(FlashCard, pk=pk)
-    return render(request, "show_prompt.html", {"flashcard": flashcard, "deck": deck})
+    flashcards = FlashCard.objects.get(pk=pk)
+    return render(request, "show_prompt.html", {"deck": deck, "flashcards": flashcards})
 
 
-@login_required
+@ login_required
 def show_answer(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)

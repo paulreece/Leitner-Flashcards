@@ -9,22 +9,23 @@
 <a href={% url 'deck_list' %}> Back to Deck List</a>
 
 <div>
-    <p>{{ flashcard.prompt }}</p>
+    <p>{{ flashcards.prompt }}</p>
 </div>
 <div >
     {% if flashcards %}
-      <p class = 'question'>{{ flashcards }}</p>
-      <p class = 'answer'>{{ flashcards.flash_answer }}</p>
+      <p >{{ flashcards.prompt }}</p>
+      <p >{{ flashcards.answer }}</p>
       <!-- Here we link to the 'flashcard' view, and pass it the ID of the next card in the sequence -->
-      <a href="{% url 'flashcard' flashcards.get_next.id %}">Next flashcard</a>
+      <a href={% url 'show_prompt' deck.slug flashcards.get_next.id%}>Next FlashCard</a>
       {% else %}
         <p>NO ACCESS RECORDS FOUND!</p>
       {% endif %}
   </div>
 <div>
 <!--this div will hold options to flip the card and to go to the next card -->
-    <a href={% url 'show_answer' %}>flip</a>
-    <a href={% url 'show_prompt' %}>next</a>
+
+
 </div>
 
 {% endblock content %}
+    <!-- <a href={% url 'show_answer' deck.slug flashcards.get.id %}>flip</a> -->

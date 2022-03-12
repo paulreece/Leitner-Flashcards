@@ -1,12 +1,14 @@
+{% extends "base.html" %}
+
 {% block content %}
 <h1> Create a Deck.</h1>
-<div class="form">
+<div>
     <form method="POST">
     {% csrf_token %}
     {% for field in form %}
 <div>
     <label for="{{field.id_for_label}}">{{field.label}}</label>
-    {{ field }}
+    <input class="input" type="text" name={{form.name.html_name}} id="deck-title-input" value="{{deck.name }}">
 </div>
 {% endfor %}
 <div>

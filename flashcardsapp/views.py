@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 def homepage(request):
     if request.user.is_authenticated:
-        return redirect("home.html")
+        return redirect("deck_list")
 
-    return render(request, "deck_list.html")
+    return render(request, "home.html")
 
 
 @login_required

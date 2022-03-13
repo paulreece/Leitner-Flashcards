@@ -14,11 +14,11 @@
 <div >
     {% if flashcards %}
       <p >{{ flashcards.prompt }}</p>
-      <p >{{ flashcards.answer }}</p>
       <!-- Here we link to the 'flashcard' view, and pass it the ID of the next card in the sequence -->
       <a href={% url 'show_prompt' deck.slug flashcards.get_next.id%}>Next FlashCard</a>
+      <a href={% url 'show_answer' deck.slug flashcards.pk %}>flip</a>
       {% else %}
-        <p>NO ACCESS RECORDS FOUND!</p>
+        <p>No Flashcards found!</p>
       {% endif %}
   </div>
 <div>
@@ -28,4 +28,3 @@
 </div>
 
 {% endblock content %}
-    <!-- <a href={% url 'show_answer' deck.slug flashcards.get.id %}>flip</a> -->

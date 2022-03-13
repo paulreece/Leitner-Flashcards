@@ -9,15 +9,36 @@
 <a href={% url 'deck_list' %}>Back to Deck List</a>
 
 <div>
-    <p class="f3 lh-copy">{{ flashcard.prompt }}</p>
-    <p>{{ flashcard.answer }}</p>
+    <p class="f3 lh-copy">{{ flashcards.prompt }}</p>
+    <p>{{ flashcards.answer }}</p>
 </div>
 <div>
+    {% if flashcards %}
 <!--this div will hold options to flip the card, to go to the next card, and mark it as studied -->
-    <a href={% url 'show_prompt' %}>flip</a>
-    <a href={% url 'show_prompt' %}>next</a>
-    <p>I got this!</p>
-    <p>I don't got this!</p>
+
+<a href={% url 'show_prompt' deck.slug flashcards.get_next.id%}>Next FlashCard</a>
+<a href={% url 'add_correct' deck.slug flashcards.id %}>I got this!</a>
+<div>
+<form action="{% url 'add_correct' deck.slug flashcards.pk %}" method="POST">
+    {% csrf_token %}
+      <button type="submit">I got this</button>
+      </form>
+    </div>
+<div>
+<form action="{% url 'add_incorrect' deck.slug flashcards.pk %}" method="POST">
+        {% csrf_token %}
+     
+          <button type="submit">I don't got this</button>
+          </form>
 </div>
 
+</div>
+{% else %}
+<p>No Flashcards found!</p>
+{% endif %}
+
+
+
 {% endblock content %}
+
+

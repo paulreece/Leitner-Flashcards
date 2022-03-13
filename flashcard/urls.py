@@ -28,6 +28,10 @@ urlpatterns = [
     path("decks/<slug:slug>/delete",
          flash_views.delete_deck, name="delete_deck"),
     path("decks/<slug:slug>", flash_views.show_flashcards, name="show_flashcards"),
+    path("decks/<slug:slug>/<int:pk>/correct/",
+         flash_views.add_correct, name="add_correct"),
+    path("decks/<slug:slug>/<int:pk>/incorrect/",
+         flash_views.add_incorrect, name="add_incorrect"),
     path("decks/<slug:slug>/add/",
          flash_views.add_flashcard, name="add_flashcard"),
     path("decks/<slug:slug>/<int:pk>/edit/",
@@ -38,5 +42,4 @@ urlpatterns = [
          flash_views.show_prompt, name="show_prompt"),
     path("decks/<slug:slug>/<int:pk>/answer",
          flash_views.show_answer, name="show_answer"),
-
 ]

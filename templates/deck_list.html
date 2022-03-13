@@ -9,24 +9,18 @@
   <div class="box w5 h-75 pb5 pt4">
       <p class="f3 lh-copy">{{ deck.name }} </p>
       <p>{{ deck.description }} </p>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <div>
       <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %}>Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
       <a href={% url 'show_flashcards' slug=deck.slug %}>Show Flashcards</a>
       <a href={% url 'show_prompt' deck.slug flashcards.id%}>Study Flashcards</a>
-=======
-=======
->>>>>>> main
+
 <div class="pt4">
       <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %} class="db">Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%} class="db">Delete Deck</a>
       <a href={% url 'show_flashcards' slug=deck.slug %} class="db">Show Flashcards</a>
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
+
 
     
     </div>

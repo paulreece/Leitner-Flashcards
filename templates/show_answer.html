@@ -16,6 +16,11 @@
     {% if flashcards %}
 <!--this div will hold options to flip the card, to go to the next card, and mark it as studied -->
 
+    <a href={% url 'show_prompt' %}class="db">flip</a>
+    <a href={% url 'show_prompt' %}class="db">next</a>
+    <p class="db">I got this!</p>
+    <p class="db">I don't got this!</p>
+
 <a href={% url 'show_prompt' deck.slug flashcards.get_next.id%}>Next FlashCard</a>
 <a href={% url 'show_incorrect' deck.slug %}>Finish Studying</a>
 <div>
@@ -31,6 +36,7 @@
           <button type="submit">I don't got this</button>
           </form>
 </div>
+
 
 </div>
 {% else %}

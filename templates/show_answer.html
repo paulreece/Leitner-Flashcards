@@ -14,10 +14,10 @@
 </div>
 <div>
 <!--this div will hold options to flip the card, to go to the next card, and mark it as studied -->
-    <a href={% url 'show_prompt' %}>flip</a>
-    <a href={% url 'show_prompt' %}>next</a>
-    <p>I got this!</p>
-    <p>I don't got this!</p>
+    <a href={% url 'show_prompt' %}class="db">flip</a>
+    <a href={% url 'show_prompt' %}class="db">next</a>
+    <p class="db">I got this!</p>
+    <p class="db">I don't got this!</p>
 </div>
 
 {% endblock content %}

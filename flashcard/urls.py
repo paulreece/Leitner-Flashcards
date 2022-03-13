@@ -34,9 +34,9 @@ urlpatterns = [
          flash_views.edit_flashcard, name="edit_flashcard"),
     path("decks/<slug:slug>/<int:pk>/delete/",
          flash_views.delete_flashcard, name="delete_flashcard"),
-    path("decks/<slug:slug>/<int:pk>",
+    path("decks/<slug:slug>/<int:pk>/prompt",
          flash_views.show_prompt, name="show_prompt"),
-    path("decks/<slug:slug>/<int:pk>",
+    path("decks/<slug:slug>/<int:pk>/answer",
          flash_views.show_answer, name="show_answer"),
 
 ]

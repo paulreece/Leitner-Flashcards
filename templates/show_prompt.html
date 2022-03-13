@@ -11,9 +11,18 @@
 <div>
     <p>{{ flashcards.prompt }}</p>
 </div>
+
+
+    {% if flashcards %}
+    <div class="card" id="card">
+      <h2 class="front">{{ flashcards.prompt }}</h2>
+      <h2 class="back">{{ flashcards.answer }}</h2>
+    </div>
+
 <div class="box w5 h-75 pb5 pt4">
     {% if flashcards %}
       <p>{{ flashcards.prompt }}</p>
+
       <!-- Here we link to the 'flashcard' view, and pass it the ID of the next card in the sequence -->
       <div class="is-flex-direction-row">
       <a href={% url 'show_prompt' deck.slug flashcards.get_next.id%} class="db">Next Flashcard</a>
@@ -21,8 +30,11 @@
       {% else %}
         <p>No Flashcards found!</p>
       {% endif %}
+
+
     </div> <!-- end of div in bottom of card -->
   </div>
+
 <div>
 <!--this div will hold options to flip the card and to go to the next card -->
 

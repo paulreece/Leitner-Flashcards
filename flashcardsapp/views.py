@@ -1,4 +1,5 @@
 from curses import flash
+from pickle import FALSE
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponseRedirect
@@ -132,8 +133,52 @@ def show_prompt(request, slug, pk):
 @ login_required
 def show_answer(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
+    flashcards = FlashCard.objects.get(pk=pk)
+    return render(request, "show_answer.html", {"flashcards": flashcards, "deck": deck})
+
+
+@ login_required
+def add_correct(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
     flashcard = get_object_or_404(FlashCard, pk=pk)
-    return render(request, "show_answer.html", {"flashcard": flashcard, "deck": deck})
+    if request.method == "GET":
+        correct = FlashCard
+    else:
+        correct = FlashCard(request.method == "POST")
+
+        FlashCard.objects.filter(pk=flashcard.pk).update(
+            correct=True
+        ),
+        return redirect(to="show_prompt", slug=deck.slug, pk=flashcard.pk)
+
+    return render(request, "correct.html", {"deck": deck, "flashcard": flashcard, "correct": correct},)
+
+
+@ login_required
+def add_incorrect(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcard = get_object_or_404(FlashCard, pk=pk)
+    if request.method == "GET":
+        incorrect = FlashCard
+    else:
+        missed = flashcard.missed
+        missed += 1
+        incorrect = FlashCard(request.method == "POST")
+
+        FlashCard.objects.filter(pk=flashcard.pk).update(
+            correct=False, missed=missed
+        ),
+        return redirect(to="show_prompt", slug=deck.slug, pk=flashcard.pk)
+
+    return render(request, "incorrect.html", {"deck": deck, "flashcard": flashcard, "incorrect": incorrect},)
+
+@ login_required
+def show_incorrect(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcards = FlashCard.objects.all().filter(flashcard_deck_id=deck.id)
+
+    return render(request, "show_incorrect.html", {"deck": deck, "flashcards": flashcards})
+
 
 
 # class FlaschCardListView(LoginRequiredMixin, ListView):

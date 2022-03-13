@@ -4,12 +4,18 @@
 
 {% block content %}
 
-{% for flashcard in flashcards %}
-{% if flashcard.correct == False %}
-<div class="box w5 h-75 pb5 pt4">
-    <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
-    <p>{{ flashcard.answer }} </p>
-<div>
+
+
+<section>
+    <div class="pb5"><h1>All Flashcards in your deck</h1></div>
+    {% for flashcard in flashcards %}
+    {% if flashcard.correct == False %}
+    <div class="box w5 h-75 pb5 pt4">
+        <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
+        <p>{{ flashcard.answer }} </p>
+    </div>
+</section>
 {% endif %}
 {% endfor %}
 {% endblock content %}
+

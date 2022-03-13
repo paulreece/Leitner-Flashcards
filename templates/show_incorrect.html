@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% for flashcard in flashcards %}
+{% if flashcard.correct == False %}
+<div class="box w5 h-75 pb5 pt4">
+    <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
+    <p>{{ flashcard.answer }} </p>
+<div>
+{% endif %}
+{% endfor %}
+{% endblock content %}

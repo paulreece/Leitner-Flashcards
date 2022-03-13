@@ -28,6 +28,8 @@ urlpatterns = [
     path("decks/<slug:slug>/delete",
          flash_views.delete_deck, name="delete_deck"),
     path("decks/<slug:slug>", flash_views.show_flashcards, name="show_flashcards"),
+    path("decks/<slug:slug>/incorrect",
+         flash_views.show_incorrect, name="show_incorrect"),
     path("decks/<slug:slug>/<int:pk>/correct/",
          flash_views.add_correct, name="add_correct"),
     path("decks/<slug:slug>/<int:pk>/incorrect/",

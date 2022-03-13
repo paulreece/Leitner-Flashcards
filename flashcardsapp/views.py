@@ -172,6 +172,15 @@ def add_incorrect(request, slug, pk):
 
     return render(request, "incorrect.html", {"deck": deck, "flashcard": flashcard, "incorrect": incorrect},)
 
+@ login_required
+def show_incorrect(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcards = FlashCard.objects.all().filter(flashcard_deck_id=deck.id)
+
+    return render(request, "show_incorrect.html", {"deck": deck, "flashcards": flashcards})
+
+
+
 # class FlaschCardListView(LoginRequiredMixin, ListView):
 #     model = FlashCard
 #     context_object_name = 'flashcards'

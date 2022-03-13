@@ -19,3 +19,16 @@
 {% endfor %}
 {% endblock content %}
 
+
+<section>
+    <div class="box w5 h-75 pb5 pt4">
+{% for flashcard in flashcards %}
+{% if flashcard.correct == False %}
+    <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
+    <p>{{ flashcard.answer }} </p>
+{% endif %}
+{% endfor %}
+</div>
+</section>
+{% endblock content %}
+

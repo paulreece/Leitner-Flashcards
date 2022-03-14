@@ -5,7 +5,7 @@
 <section>
  <div class="pb5"><h1>All Flashcard Decks</h1></div>
   <div class="f6 lh-copy">
-  
+  <div class="pb5">
     {% if user.is_authenticated %}
       <a href={% url 'auth_logout' %} class="db">Log Out</a>
     
@@ -13,24 +13,22 @@
       <a href={% url 'registration_register' %} class="db">Register</a>
       <a href={% url 'auth_login' %} class="db">Log In</a>
     {% endif %}
-
+  </div>
   {% for deck in decks %}
   <div flex felx-wrap>
-  <div class="box w5 h-75 pb5 pt4">
-      <p class="f3 lh-copy">{{ deck.name }} </p>
+  <div class="box w-40 h-75 pb5 pt4">
+      <p class="p1 f3 lh-copy pb5 ">{{ deck.name }} </p>
+      <hr>
       <p>{{ deck.description }} </p>
 
 <div>
-      <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %}>Edit Deck</a>
-      <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
-      <a href={% url 'show_flashcards' slug=deck.slug %}>Show Flashcards</a>
-      <a href={% url 'show_prompt' deck.slug flashcards.id%}>Study Flashcards</a>
+
 
 <div class="pt4">
-      <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %} class="db">Edit Deck</a>
+      <a href={% url 'show_prompt' deck.slug flashcards.id%}> Study Flashcards</a><a href={% url 'edit_deck' slug=deck.slug pk=user.pk %} class="db">Edit Deck</a>
       <a href={% url 'delete_deck' slug=deck.slug%} class="db">Delete Deck</a>
       <a href={% url 'show_flashcards' slug=deck.slug %} class="db">Show Flashcards</a>
-
+      
 
     
     </div>

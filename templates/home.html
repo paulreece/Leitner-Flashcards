@@ -12,8 +12,8 @@
             <a href={% url 'auth_logout' %} class="db">Log Out</a>
           
           {% else %}
-            <a href={% url 'registration_register' %} class="db">Register</a>
-            <a href={% url 'auth_login' %} class="db">Log In</a>
+          <button class="button is-primary"> <a href={% url 'registration_register' %} class="db">Register</a></button>
+            <button class="button is-primary"><a href={% url 'auth_login' %} class="db">Log In</a> </button>
           {% endif %}
       </nav>
 </div>

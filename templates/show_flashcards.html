@@ -5,9 +5,10 @@
 <section>
   <div class="pb5"><h1>All Flashcards in your deck</h1></div>
   {% for flashcard in flashcards %}
-  <div class="box w5 h-75 pb5 pt4">
+  <div class="box w-40 h-75 pb5 pt4">
       <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
-      <p>{{ flashcard.answer }} </p>
+      <hr>
+      <p class="pb5">{{ flashcard.answer }} </p>
 <div>
 
       <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%}>Edit Flashcard</a>
@@ -23,7 +24,7 @@
 <section>
   <a href={% url 'add_flashcard' slug=deck.slug %}>Add Flashcard</a>
 
-<section class="pt4">
+<section>
 
 
 <section class="pt4">

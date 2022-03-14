@@ -8,8 +8,9 @@
 
 <a href={% url 'deck_list' %}>Back to Deck List</a>
 
-<div class="box w5 h-75 pb5 pt4 ma5">
+<div class="box w-40 h-75 pt4 ma5">
     <p class="f3 lh-copy">{{ flashcards.prompt }}</p>
+    <hr>
     <p>{{ flashcards.answer }}</p>
 </div>
 <div>
@@ -21,15 +22,17 @@
 <div>
 <form action="{% url 'add_correct' deck.slug flashcards.pk %}" method="POST">
     {% csrf_token %}
-      <button type="submit">I got this</button>
+      <button class="button is-primary" type="submit">I got this</button>
       </form>
     </div>
+<div class="is-justify-content-flex-start">
 <div>
 <form action="{% url 'add_incorrect' deck.slug flashcards.pk %}" method="POST">
         {% csrf_token %}
      
-          <button type="submit">I don't got this</button>
+          <button class="button is-danger" type="submit">I don't got this</button>
           </form>
+</div>
 </div>
 
 </div>

@@ -5,12 +5,13 @@
 <section>
   <div class="pb5"><h1>All Flashcards in {{deck.name}}</h1></div>
   {% for flashcard in flashcards %}
-  <div class="box w5 h-75 pb5 pt4">
+  <div class="box w-60 h-75 pb5 pt4">
       <p class="f3 lh-copy">{{ flashcard.prompt }} </p>
-      <p>{{ flashcard.answer }} </p>
+      <hr>
+      <p class="pb3">{{ flashcard.answer }} </p>
 <div>
 
-      <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%}>Edit Flashcard</a>
+      <a href={% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk%}>Edit Flashcard |</a>
       <a href={% url 'delete_flashcard' slug=deck.slug pk=flashcard.pk%}>Delete Flashcard</a>
     
 

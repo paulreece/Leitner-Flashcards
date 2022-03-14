@@ -16,7 +16,7 @@
     <!-- {{ form.description.as_widget }} -->
     </div>      
     <div class="mt3">
-    <button type="submit">Save changes</button>
+    <button class="button is-primary" type="submit">Save changes</button>
     </div>
 </form>
 
@@ -27,7 +27,7 @@
         <p>{{ flashcard.prompt }} </p>
         <p>{{ flashcard.answer }} </p>
 <div>
-        <a href={% url 'edit_flashcard' %}>Edit Flashcard</a>
+        <a href={% url 'edit_flashcard' %}>Edit Flashcard |</a>
         <a href={% url 'delete_flashcard' pk=flashcard.pk%}>Delete Flashcard</a>
         
     </div>
@@ -37,7 +37,7 @@
 
 <section>
     <!-- this section should let you add a flashcard,study this deck -->
-    <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck</a>
+    <a href={% url 'delete_deck' slug=deck.slug%}>Delete Deck | </a>
     <a href={% url 'add_flashcard' slug=deck.slug%}>Add Flashcard</a>
     
 </section>

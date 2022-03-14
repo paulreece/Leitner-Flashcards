@@ -1,8 +1,13 @@
 .logo {
 
-  width: 25%;
+  width: 75%;
   height: auto;
 }
+
+.p1 {
+    text-decoration: underline;
+}
+
 .card {
   position: relative;
   width: 100%;
@@ -34,13 +39,6 @@
 
 .flipCard {
   transform: rotateY(180deg);
-}
-
     width: 100%;
     height: auto;
 }
-.wrong {
-    background-color: red;
-    justify-content: space-between;
-}
-

@@ -3,7 +3,17 @@
 {% block content %}
 
 <section>
- <div class="pb5"><h1>All Flashcard Decks</h1></div> 
+ <div class="pb5"><h1>All Flashcard Decks</h1></div>
+  <div class="f6 lh-copy">
+  
+    {% if user.is_authenticated %}
+      <a href={% url 'auth_logout' %} class="db">Log Out</a>
+    
+    {% else %}
+      <a href={% url 'registration_register' %} class="db">Register</a>
+      <a href={% url 'auth_login' %} class="db">Log In</a>
+    {% endif %}
+
   {% for deck in decks %}
   <div flex felx-wrap>
   <div class="box w5 h-75 pb5 pt4">

@@ -6,10 +6,18 @@
     <form method="POST">
     {% csrf_token %}
     {% for field in form %}
+<<<<<<< HEAD
+=======
+<div>
+>>>>>>> main
     <div>
         <label class="input" for="{{field.id_for_label}}">{{field.label}}</label>
         {{ field }}
     </div>
+<<<<<<< HEAD
+=======
+</div>
+>>>>>>> main
 {% endfor %}
 <div>
     <button type="submit"> Save </button>

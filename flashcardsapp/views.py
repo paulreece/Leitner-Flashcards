@@ -181,6 +181,7 @@ def show_incorrect(request, slug):
     return render(request, "show_incorrect.html", {"deck": deck, "flashcards": flashcards})
 
 
+<<<<<<< HEAD
 def search_by_title(request):
     deck = get_object_or_404(Deck, slug=slug)
     search_term = request.GET.get('q')
@@ -189,6 +190,8 @@ def search_by_title(request):
     else:
         return redirect("show_flashcards")
     return render(request, "show_flashcards.html", {"deck": deck, "flashcards": results})
+=======
+>>>>>>> main
 # class FlaschCardListView(LoginRequiredMixin, ListView):
 #     model = FlashCard
 #     context_object_name = 'flashcards'

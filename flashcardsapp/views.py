@@ -61,7 +61,7 @@ def edit_deck(request, slug, pk):
             deck = form.save(commit=False)
             deck.user = user
             deck.save()
-            return redirect(to="deck_list.html")
+            return redirect(to="deck_list")
     else:
         form = DeckForm(instance=deck)
     return render(request, "edit_deck.html", {'form': form, "deck": deck, "user": user})
@@ -102,12 +102,12 @@ def edit_flashcard(request, pk, slug):
     if request.method == "POST":
         form = FlashCardForm(request.POST, instance=flashcard)
         if form.is_valid():
-            flashcard = form.save(commit=False)
-            flashcard.deck = deck.slug
+
+            flashcard.deck_id = deck.id
             flashcard.save()
-            return redirect(to="show_flashcards.html")
+            return redirect(to="show_flashcards", slug=deck.slug)
     else:
-        form = DeckForm(instance=flashcard)
+        form = FlashCardForm(instance=flashcard)
     return render(request, "edit_flashcard.html", {'form': form, "deck": deck, "flashcard": flashcard})
 
 
@@ -117,7 +117,7 @@ def delete_flashcard(request, pk, slug):
     flashcard = get_object_or_404(FlashCard, pk=pk)
     if request.method == 'POST':
         flashcard.delete()
-        return redirect(to='show_flashcards.html')
+        return redirect(to='show_flashcards', slug=deck.slug)
 
     return render(request, "delete_flashcard.html",
                   {"deck": deck, "flashcard": flashcard})

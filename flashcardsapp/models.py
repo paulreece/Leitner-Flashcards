@@ -44,6 +44,9 @@ class FlashCard(models.Model):
     missed = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now_add=datetime.now)
     objects = models.Manager()
+    box = models.ForeignKey(
+        "Box", on_delete=models.CASCADE, null=True, blank=True, related_name="box",
+    )
 
     def __str__(self):
         return self.prompt
@@ -55,3 +58,7 @@ class FlashCard(models.Model):
         # If the current card is the last one, return the first card in the deck
         else:
             return FlashCard.objects.all().order_by('id').first()
+
+
+class Box(models.Model):
+    name = models.CharField(max_length=200)

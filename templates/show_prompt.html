@@ -16,7 +16,7 @@
 
 
 
-
+{% if flashcards.flashcard_deck_id == deck.id %}
     <div class="card" id="card">
       <div class="front">
       <h2 >{{ flashcards.prompt }}</h2>
@@ -26,7 +26,7 @@
     </div>
     </div>
 
-
+{% endif %}
 <div>
 <!--this div will hold options to flip the card and to go to the next card -->
 

@@ -46,7 +46,7 @@ def add_deck(request, pk):
             deck = form.save(commit=False)
             deck.user = user
             deck.save()
-            return redirect(to="deck_list.html", pk=user.pk)
+            return redirect(to="deck_list")
 
     return render(request, "add_deck.html", {"form": form, "user": user})
 
@@ -172,6 +172,7 @@ def add_incorrect(request, slug, pk):
 
     return render(request, "incorrect.html", {"deck": deck, "flashcard": flashcard, "incorrect": incorrect},)
 
+
 @ login_required
 def show_incorrect(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
@@ -180,7 +181,14 @@ def show_incorrect(request, slug):
     return render(request, "show_incorrect.html", {"deck": deck, "flashcards": flashcards})
 
 
-
+def search_by_title(request):
+    deck = get_object_or_404(Deck, slug=slug)
+    search_term = request.GET.get('q')
+    if search_term:
+        results = FlashCard
+    else:
+        return redirect("show_flashcards")
+    return render(request, "show_flashcards.html", {"deck": deck, "flashcards": results})
 # class FlaschCardListView(LoginRequiredMixin, ListView):
 #     model = FlashCard
 #     context_object_name = 'flashcards'

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import datetime
-
+from django.template.defaultfilters import slugify
 
 class User(AbstractUser):
     def __repr__(self):
@@ -27,6 +27,9 @@ class Deck(models.Model):
         unique=True,
     )
     date = models.DateTimeField(auto_now_add=datetime.now)
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
 
 
 class FlashCard(models.Model):

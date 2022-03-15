@@ -4,36 +4,17 @@
 <h1>Edit Flashcard</h1>
 
 <div class="control">
-    <form action="{% url 'edit_flashcard' slug=deck.slug pk=flashcard.pk %}" method="POST">
-        {% csrf_token %}
-        <div class="form-field mt3">
-        <label for="{{form.name.id_for_label}}">{{ form.prompt.label }}</label>
-        <input class="input" type="text" name={{form.prompt.html_name}} id="deck-title-input" value="{{flashcard.prompt }}">
-        </div>
-        <div class="form-field mt3">
-        <label for="{{form.answer.id_for_label}}">{{form.answer.label }}</label>
-        <input class="input" type="text" name={{form.answer.html_name}} id="deck-title-input" value="{{flashcard.answer }}">
-        </div>      
-        <div class="mt3">
-        <button type="submit">Save changes</button>
-        </div>
-    </form>
+<form action="{% url 'edit_flashcard' pk=flashcard.pk slug=deck.slug %}" method="POST">
+    {% csrf_token %}
+    <div class="w-60">
+    <div>Prompt:<input class="input" type="text" name={{form.name.html_name}} id="flashcard-prompt-input" value="{{flashcard.prompt}}"></div>
+    <div>Answer:<input class="input" type="text" name={{form.name.html_name}} id="flashcard-answer-input" value="{{flashcard.answer}}"></div>
+    </div>
+    <div>
+    <button class="button is-primary" type="submit">Save changes</button>
+    </div>
+</form>
+
 
 {% endblock content %}
 
-<div class="control">
-    <form action="{% url 'edit_deck' slug=deck.slug pk=user.pk %}" method="POST">
-        {% csrf_token %}
-        <div class="form-field mt3">
-        <label for="{{form.name.id_for_label}}">{{ form.name.label }}</label>
-        <input class="input" type="text" name={{form.name.html_name}} id="deck-title-input" value="{{deck.name }}">
-        </div>
-        <div class="form-field mt3">
-        <label for="{{form.description.id_for_label}}">{{form.description.label }}</label>
-        <input class="input" type="text" name={{form.description.html_name}} id="deck-title-input" value="{{deck.description }}">
-        <!-- {{ form.description.as_widget }} -->
-        </div>      
-        <div class="mt3">
-        <button type="submit">Save changes</button>
-        </div>
-    </form>

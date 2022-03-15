@@ -11,24 +11,32 @@
 {% block content %}
 
 <h3> Time to Study! </h3>
+<div class="is-flex-direction-row">
+<a href={% url 'deck_list' %}> Back to Deck List |</a>
+<a href={% url 'show_incorrect' deck.slug %}>Finish Studying</a>
+</div>
 
-<a href={% url 'deck_list' %}> Back to Deck List</a>
 
-
-
-{% if flashcards.flashcard_deck_id == deck.id %}
-    <div class="card" id="card">
+    <div class="card pb7 pt4" id="card">
       <div class="front">
-      <h2 >{{ flashcards.prompt }}</h2>
+      <h2 class="lh-solid has-text-info">{{ flashcards.prompt }}</h2>
     </div>
     <div class="back">
       <h2 >{{ flashcards.answer }}</h2>
     </div>
     </div>
 
-{% endif %}
+
 <div>
-<!--this div will hold options to flip the card and to go to the next card -->
+<form action="{% url 'add_correct' deck.slug flashcards.pk %}" method="POST">
+    {% csrf_token %}
+      <button class="button is-primary" type="submit">I got this</button>
+      </form>
+<form action="{% url 'add_incorrect' deck.slug flashcards.pk %}" method="POST">
+        {% csrf_token %}
+          <button class="button is-danger" type="submit">I don't got this</button>
+          </form>
+</div>
 
 
 </div>

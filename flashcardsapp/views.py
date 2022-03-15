@@ -20,10 +20,11 @@ def homepage(request):
 @login_required(login_url="auth_login")
 def deck_list(request):
     decks = Deck.objects.all()
-    flashcards = FlashCard.objects.order_by('?').first()
+    for deck in decks:
+        flashcards = FlashCard.objects.all()
     return render(
         request, "deck_list.html", {
-            "decks": decks, "flashcards": flashcards}
+            "decks": decks, "flashcards": flashcards, "deck": deck}
     )
 
 
@@ -126,7 +127,7 @@ def delete_flashcard(request, pk, slug):
 @ login_required
 def show_prompt(request, slug, pk):
     deck = get_object_or_404(Deck, slug=slug)
-    flashcards = FlashCard.objects.get(pk=pk)
+    flashcards = FlashCard.objects.filter(flashcard_deck_id=deck.id).get(pk=pk)
     return render(request, "show_prompt.html", {"deck": deck, "flashcards": flashcards})
 
 

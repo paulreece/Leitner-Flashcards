@@ -15,12 +15,18 @@
     {% endif %}
 
   {% for deck in decks %}
+  
   <div class="pb3">
   <div class="box w-60 h-75 pb7 pt4">
       <p class="p1 f3 lh-copy">{{ deck.name }} </p>
       <p>{{ deck.description }} </p>
 <div class="pt4">
-  <a href={% url 'show_prompt' deck.slug flashcards.id%}>Study Flashcards |</a>
+{% for flashcard in flashcards %}
+{% if flashcard.flashcard_deck_id == deck.id %}
+  <a href={% url 'show_prompt' deck.slug flashcard.id %}>Study Flashcards |</a>
+
+{% endif %}
+{% endfor %}
   <a href={% url 'edit_deck' slug=deck.slug pk=user.pk %} class=>Edit Deck |</a>
       <a href={% url 'delete_deck' slug=deck.slug%} class=>Delete Deck |</a>
       <a href={% url 'show_flashcards' slug=deck.slug %} class=>Show Flashcards</a>

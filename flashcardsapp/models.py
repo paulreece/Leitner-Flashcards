@@ -52,7 +52,7 @@ class FlashCard(models.Model):
         return self.prompt
 
     def get_next(self):
-        next = FlashCard.objects.filter(id__gt=self.id).order_by('?').first()
+        next = FlashCard.objects.filter(id__gt=self.id).order_by('id').first()
         if next:
             return next
         # If the current card is the last one, return the first card in the deck

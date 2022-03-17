@@ -19,5 +19,5 @@ Unfortunately this web application has yet to be deployed. That means it is not 
 ## Project Planning
 
 In planning this project we first created our models and their relationships in lucid charts. We then split up the work into a todo list on a trello board. Here are links to each:
-[Our Trello Board] (https://trello.com/b/dIgPBgnn/flashcard-shadowclan)
-[Our Lucid Chart Models] (https://lucid.app/lucidchart/3d502964-3799-4d63-93d0-5fc516f9695e/edit?invitationId=inv_bf5b73a4-6fba-47a7-9bd2-815d56a499ce)
+[Our Trello Board](https://trello.com/b/dIgPBgnn/flashcard-shadowclan)
+[Our Lucid Chart Models](https://lucid.app/lucidchart/3d502964-3799-4d63-93d0-5fc516f9695e/edit?invitationId=inv_bf5b73a4-6fba-47a7-9bd2-815d56a499ce)

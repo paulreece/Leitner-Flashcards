@@ -1,77 +1,23 @@
-# Choose a Project
+# ShadowClan's Flashcards
 
-This week, you will be on a small team working on a project. Your team should use [feature branches](https://bocoup.com/blog/git-workflow-walkthrough-feature-branches) for development. You can use [GitHub issues](https://guides.github.com/features/issues/) to keep track of what needs to be done and who is working on what.
+“ShadowClan’s Flashcards” is a web application that allows you to create and study flashcards. Users can create multiple decks and flashcards for each deck. Once created, users will have the opportunity to study their flashcards using the Leitner System.
 
-Use your combined creativity and good judgment to make decisions as you work. Users expect to see some common features in web applications. If they are not mentioned in the project's description, you should still do them. For example: in the code snippet application, users should have avatar images. You don't have to handle file uploads yourself -- you could use Gravatar with [django-gravatar](https://github.com/twaddington/django-gravatar) -- but you need some way of handling that.
+## How to use it.
 
-In addition to those small features, come up with your own features to make your project unique. You will likely use this project in your portfolio, so make it something you can be proud of.
+Once you’ve registered an account, you will be directed to a homepage with the option to create a deck. Click the “Add a New Deck” link to create your first deck. Once you create a deck, you will be given an option to “Add Flashcards”. Click “Add Flashcards” to begin adding flashcards to your deck. If you would like to view your added flashcards, click “show flashcards”. By default, flashcards will be put into box 1 as part of the Leitner system. However, you are able to manually choose which box a card goes into. If you select the wrong box or make an error o a flashcard, you can simply click “Edit Flashcard” to fix it. If you no longer need a flashcard, click “Delete Flashcard”.
 
-No starter repo is provided, so you will have to run the `django-admin` commands to create a new project.
-# Rules for all projects
+Once you have created a deck and its corresponding flashcards, you can click “Study Flashcards” to begin studying. Our site uses the famous Leitner System to study flashcards, so you’ll want to select “Box 1” to begin studying. If you get a card right, you’ll select the green button that reads “Answer = Correct! Add to (next box)”. If you miss a card, skip to the next card and keep studying until you get all of the cards in that box correct. Once you’ve gotten them all correct, box 1 will disappear and you will be redirected back to the box list where you can select box 2 to continue studying. Repeat this process until you finish box 4.
 
-- Your application should be styled. It should be usable and aesthetically neutral, at a minimum. You can use a library or you can write custom css, or both. It is up to you.
-- Your application must include a README.md file with instructions on how to run it. [Take a look at this site on README basics](https://www.makeareadme.com/) for a good markdown template you can follow, and links to example READMEs.
-- Your application should be able to run from scratch by downloading the repo, running `pipenv install`, `pipenv shell`, `python manage.py migrate`, and `python manage.py runserver`. If there are any other steps necessary, please put them in the README.md file.
+## More about the Leitner System.
 
-## Stretch goal for each project: trying new things
+According to Wikipedia, The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in the 1970s. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. In this method, flashcards are sorted into groups according to how well the learner knows each one in Leitner's learning box. The learners try to recall the solution written on a flashcard. If they succeed, they send the card to the next group. If they fail, they send it back to the first group. Each succeeding group has a longer period before the learner is required to revisit the cards.
 
-Teams should consider trying something they don't know how to do on their project. This could be a Python or JavaScript library they haven't used before or a feature of Django they haven't tried.
+## How to get this web application functioning for you.
 
-# The Projects
+Unfortunately this web application has yet to be deployed. That means it is not available for public use. This web application was created as part of a class project to practice writing code in Django and Python. If you would like to try this for yourself, simply clone the repo and do a pipenv install of django, django-registration-redux, and environ. Once this is done, start your shell in pipenv and run python manage.py runserver.
 
-Your team should choose one of these options.
-## Option 1: Code Snippet Manager
+## Project Planning
 
-You need a good way to manage snippets of code you reuse often. You are going to build a web application that has these goals:
-
-- Logged in users can add code snippets.
-- Logged in users can search their own code snippets and get results.
-- Each user has a profile page that shows their public code snippets. Other users can copy a snippet with one click, adding it to their library of snippets.
-
-### How snippets work
-
-A snippet has code (required), a language (required), a title (optional), and whatever other fields make sense. Some ideas to consider: a description or a list of tags.
-
-If you copy a snippet by clicking the copy button (or whatever UI element is used for this purpose), there's a link back to the original snippet. The easiest way to do this is with a foreign key. One should be able to see how many times a snippet has been copied.
-
-The reason why we copy snippets instead of "favorite" them is that they can change. The original snippet creator can edit their snippet; the copying user can edit their copy.
-
-### How search works
-
-Search should look for terms in the title, in other fields like a description or tags, and in the language field. If I search for "javascript auth," I should see any snippets I have about authentication using JavaScript. See [search](https://docs.djangoproject.com/en/3.2/topics/db/search/) in the Django documentation for some ideas.
-
-### How much of this is JavaScript?
-
-This can vary, but the two parts that _definitely_ need JavaScript are syntax highlighting and copying a code snippet to your clipboard.
-
-For syntax highlighting, check out [Prism.js](https://prismjs.com/) or [Highlight.js](https://highlightjs.org/).
-
-See [this article on native browser copy to clipboard](https://css-tricks.com/native-browser-copy-clipboard/) for ideas on how to copy to clipboard.
-
-## Option 2: Flashcards
-
-You want to make an application to help people learn via flashcards. You are going to build a web application that has these goals:
-
-- Logged in users can create multiple decks of flashcards, each with a prompt or question and an answer.
-- Logged in users can quiz themselves on a deck.
-- Success and failure for each card is recorded.
-
-### How decks and cards work
-
-A user can have multiple decks of flashcards. Each deck has a title. Each flash card has a prompt or question and an answer.
-
-When a user is quizzing themselves on a deck, they _do not_ have to type in answers. They are shown the prompt, they click to see the answer; they then mark whether they answered it correctly or not. They should see one card at a time.
-
-When the user marks success or failure on a card, this should be recorded.
-
-The cards should be shown in a random order at a minimum. A preferable method would be to use something like [the Leitner system](https://www.virtualsalt.com/learn10.html) for flash cards. This system uses review times; you could use that, or just use the idea of multiple boxes, with cards in lower boxes coming up more often.
-
-### Creating decks and running through decks
-
-This application has two very distinct parts: creating decks and cards and then running through those decks. This is a natural place to split work. Do not forget to make creating decks and cards an easy-to-use experience.
-
-### How much of this is JavaScript?
-
-"Flipping" a card (you don't have to animate a card flip, although if you do, that's very cool) will almost certainly require JavaScript.
-
-You could have a page load in between cards and reduce your amount of JavaScript. Depending on how you do this, it could also record success or failure, eliminating most of your JavaScript.
+In planning this project we first created our models and their relationships in lucid charts. We then split up the work into a todo list on a trello board. Here are links to each:
+[Our Trello Board] (https://trello.com/b/dIgPBgnn/flashcard-shadowclan)
+[Our Lucid Chart Models] (https://lucid.app/lucidchart/3d502964-3799-4d63-93d0-5fc516f9695e/edit?invitationId=inv_bf5b73a4-6fba-47a7-9bd2-815d56a499ce)

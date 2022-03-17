@@ -16,10 +16,7 @@ class Deck(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(max_length=1000)
     deck_user = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, related_name="deck_user", db_column='deck_user',
-    )
-    flashcard = models.ForeignKey(
-        "Flashcard", on_delete=models.CASCADE, null=True, blank=True, related_name="flashcard",
+        User, on_delete=models.CASCADE, null=True, blank=True, related_name="deck_user"
     )
     slug = models.SlugField(
         max_length=200,
@@ -45,19 +42,21 @@ class FlashCard(models.Model):
     date = models.DateTimeField(auto_now_add=datetime.now)
     objects = models.Manager()
     box = models.ForeignKey(
-        "Box", on_delete=models.CASCADE, null=True, blank=True, related_name="box",
+        "Box", on_delete=models.CASCADE,   related_name="box", default="1"
     )
+    card_seen = models.BooleanField(default=False)
 
     def __str__(self):
         return self.prompt
 
     def get_next(self):
-        next = FlashCard.objects.filter(id__gt=self.id).order_by('id').first()
+        next = FlashCard.objects.filter(
+            id__gt=self.id, box_id=self.box_id, flashcard_deck_id=self.flashcard_deck_id).order_by('id').first()
         if next:
             return next
         # If the current card is the last one, return the first card in the deck
         else:
-            return FlashCard.objects.all().order_by('id').first()
+            return FlashCard.objects.all().filter(box_id=self.box_id, flashcard_deck_id=self.flashcard_deck_id).order_by('id').first()
 
 
 class Box(models.Model):

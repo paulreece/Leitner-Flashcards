@@ -47,3 +47,10 @@
 </div>
 
 {% endblock content %}
+
+{% for flashcard in flashcards %}
+{% if flashcard.flashcard_deck_id == deck.id %}
+  <a href={% url 'show_prompt' deck.slug flashcard.id %}>Study Flashcards |</a>
+
+{% endif %}
+{% endfor %}

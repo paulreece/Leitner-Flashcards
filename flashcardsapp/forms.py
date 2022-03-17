@@ -11,4 +11,4 @@ class DeckForm(forms.ModelForm):
 class FlashCardForm(forms.ModelForm):
     class Meta:
         model = FlashCard
-        fields = ["prompt", "answer"]
+        fields = ["prompt", "answer", "box"]

@@ -10,6 +10,8 @@
     <div>Prompt:<input class="input" type="text" name={{form.prompt.html_name}} id="flashcard-prompt-input" value="{{flashcard.prompt}}"></div>
     <div>Answer:<input class="input" type="text" name={{form.answer.html_name}} id="flashcard-answer-input" value="{{flashcard.answer}}"></div>
     </div>
+    <div>Box(Select 1-4):<input class="input" type="text" maxlength="1" pattern="[1-4]{1}" name={{form.box.html_name}} id="flashcard-box-input" value="{{flashcard.box.id}}"></div>
+</div>
     <div>
     <button class="button is-primary" type="submit">Save changes</button>
     </div>

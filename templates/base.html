@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
-  {% load static %}
+
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% block meta %}{% endblock meta %}
   <link rel="shortcut icon" href="{% static 'logo-shadowclan.png' %}">
-  <link rel="stylesheet" href="{% static 'stylesheet.css'%}">
+  <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
@@ -20,9 +22,9 @@
 </head>
 
 <body class="sans-serif">
-  <header class="pa5 hero is-medium is-link is-flex-direction-row is-justify-content-space-between">
+  <header class="pa1 hero is-medium is-link is-flex-direction-row is-justify-content-space-between is-align-content-center">
     
-    <a href={% url "homepage" %} class="db link underline-hover blue"><h1 class="f4 lh-copy db header">Shadow Clan's Flashcards</h1></a>
+    <a href={% url "homepage" %} class="db link underline-hover blue"><h1 class="f1 lh-copy db header is-flex-direction-row is-align-content-center">Shadow Clan's Flashcards</h1></a>
  
       <div class="f6 lh-copy">
         <img src="{% static 'logo-shadowclan.png' %}" class="mw-15 logo" alt="Shadow Clan Logo">

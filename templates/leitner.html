@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% load statement %}
+{% block content %}
+<div class="leitner">
+<h2 class="p1 f3 lh-copy">The Method:</h2>
+<p>All the cards start off in Box (or Stack) 1. As you review the cards, each card you answer correctly goes into Box 2. If you give the wrong answer, study the card and then replace it in Box 1. When you review the cards in Box 2, if you still get the answer right, the card is promoted to Box 3, and so on until all the cards are in the highest box.
+
+    If you get an answer wrong on a card in Box 2, 3, 4 or up the the highest box you are using, the card is demoted all the way down to Box 1.</p>
+<h2 class="p1 f3 lh-copy">The Key:</h2>
+<p>The key to the efficiency and effectiveness of the Leitner system is that the cards in the lower boxes–the ones you know less well–are reviewed more frequently than the cards in the higher boxes. For example, in a four-box set up, the cards in Box 1 might be reviewed four times as often as those in Box 4. It’s up to you to choose the frequency of review for each box. Here is an example for a four-box set up:</p>
+<table border="2" cellspacing="8" cellpadding="8">
+    <tr>
+        <td class="tdd">Review Box 1</td>
+        <td class="tdd">Review Box 2</td>
+        <td class="tdd">Review Box 3</td>
+        <td class="tdd">Review Box 4</td>
+    </tr>
+    <tr>
+        <td class="tdd">4 times a day</td>
+        <td class="tdd">3 times a day</td>
+        <td class="tdd">2 times a day</td>
+        <td class="tdd">1 times a day</td>
+    </tr>
+</table>
+</div>
+<a href={% url 'deck_list' %}> Back to Deck List </a>
+{% endblock content %}>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block javascript %}
+<script src={% static "show_prompt.js" %} defer></script>
+{% endblock javascript %}
+
+
+
+{% block content %}
+
+<h3> Time to Study! </h3>
+<div class="is-flex-direction-row">
+<a href={% url 'choose_box' deck.slug %}> Back to Box List |</a>
+<a href={% url 'deck_list' %}> Back to Deck List </a>
+</div>
+
+
+
+    <div class="card" id="card">
+      <div class="front">
+      <h2 >{{ flashcards.prompt }}</h2>
+    </div>
+    <div class="back">
+      <h2 >{{ flashcards.answer }}</h2>
+    </div>
+    </div>
+
+<form action="{% url 'add_to_box_two' deck.slug flashcards.pk %}" method="POST">
+  {% csrf_token %}
+    <button class="button is-primary" type="submit">Answer=Correct, Add to Box 2</button>
+    </form>
+
+<a href={% url 'box_one' deck.slug flashcards.get_next.id %}>Next Flashcard |</a>
+<a href={% url 'add_flashcard' slug=deck.slug %}>Add Flashcard |</a>
+<a href={% url 'edit_flashcard' deck.slug flashcards.pk %}>Edit Flashcard </a>
+{% endblock content %}
+
+
+<form action="{% url 'keep_in_box_one' deck.slug flashcards.pk %}" method="POST">
+  {% csrf_token %}
+    <button class="button is-danger" type="submit">Answer=Inorrect, Keep in Box 1</button>
+    </form>

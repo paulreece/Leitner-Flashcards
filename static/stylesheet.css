@@ -12,14 +12,16 @@
   font-size: 5.5em;
   font-weight: 400;
 }
-
+.main {
+  transform: translate(-50%, -50%);
+}
 .card {
   position: relative;
   width: 500px;
   height: 250px;
   text-align: center;
   transform-style: preserve-3d;
-  transition: all 0.8s ease;
+  transition: all 1.3s ease;
 }
 
 .front {
@@ -39,7 +41,7 @@
   height: 100%;
   backface-visibility: hidden;
   background: white;
-  color: #000;
+  color: black;
   text-align: center;
   transform: rotateY(180deg);
   font-size: 2.5em;
@@ -52,4 +54,7 @@
 .wrong {
   background-color: red;
   justify-content: space-between;
+}
+.tdd {
+  padding: 4px;
 }

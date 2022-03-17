@@ -1,11 +1,5 @@
-from curses import flash
-from pickle import FALSE
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http.response import HttpResponseRedirect
-from django.http import Http404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import User, Deck, FlashCard
+from .models import User, Deck, FlashCard, Box
 from .forms import DeckForm, FlashCardForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -17,14 +11,18 @@ def homepage(request):
     return render(request, "home.html")
 
 
+@login_required
+def leitner(request):
+    return render(request, "leitner.html")
+
+
 @login_required(login_url="auth_login")
-def deck_list(request):
+def deck_list(request,):
     decks = Deck.objects.all()
-    for deck in decks:
-        flashcards = FlashCard.objects.all()
+    flashcards = FlashCard.objects.all()
     return render(
         request, "deck_list.html", {
-            "decks": decks, "flashcards": flashcards, "deck": deck}
+            "decks": decks, "flashcards": flashcards}
     )
 
 
@@ -45,7 +43,7 @@ def add_deck(request, pk):
         form = DeckForm(data=request.POST)
         if form.is_valid():
             deck = form.save(commit=False)
-            deck.user = user
+            deck.deck_user_id = user.id
             deck.save()
             return redirect(to="deck_list")
 
@@ -60,7 +58,7 @@ def edit_deck(request, slug, pk):
         form = DeckForm(request.POST, instance=deck)
         if form.is_valid():
             deck = form.save(commit=False)
-            deck.user = user
+            deck.deck_user_id = user.id
             deck.save()
             return redirect(to="deck_list")
     else:
@@ -73,7 +71,7 @@ def delete_deck(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
     if request.method == 'POST':
         deck.delete()
-        return redirect(to='deck_list.html')
+        return redirect(to='deck_list')
 
     return render(request, "delete_deck.html",
                   {"deck": deck})
@@ -85,7 +83,7 @@ def add_flashcard(request, slug):
     if request.method == 'GET':
         form = FlashCardForm()
     else:
-        form = FlashCardForm(data=request.POST)
+        form = FlashCardForm(request.POST)
         if form.is_valid():
             flashcard = form.save(commit=False)
             flashcard.flashcard_deck_id = deck.id
@@ -182,11 +180,107 @@ def show_incorrect(request, slug):
     return render(request, "show_incorrect.html", {"deck": deck, "flashcards": flashcards})
 
 
-# class FlaschCardListView(LoginRequiredMixin, ListView):
-#     model = FlashCard
-#     context_object_name = 'flashcards'
-#     template_name = 'flashcards.html'
-#     login_url = '/login'
+@ login_required
+def choose_box(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    box_one = get_object_or_404(Box, id=1)
+    flashcards_one = FlashCard.objects.all().filter(
+        box_id=box_one.id, flashcard_deck=deck)
+    box_two = get_object_or_404(Box, id=2)
+    flashcards_two = FlashCard.objects.all().filter(
+        box_id=box_two.id, flashcard_deck=deck)
+    box_three = get_object_or_404(Box, id=3)
+    flashcards_three = FlashCard.objects.all().filter(
+        box_id=box_three.id, flashcard_deck=deck)
+    box_four = get_object_or_404(Box, id=4)
+    flashcards_four = FlashCard.objects.all().filter(
+        box_id=box_four.id, flashcard_deck=deck)
+    return render(request, "choose_box.html", {"deck": deck, "flashcards_one": flashcards_one, "box_one": box_one, "flashcards_two": flashcards_two, "box_two": box_two,
+                                               "flashcards_three": flashcards_three, "box_three": box_three, "flashcards_four": flashcards_four, "box_four": box_four, })
 
-#     def get_queryset(self):
-#         return self.request.user.deck.flashcard.all()
+
+@ login_required
+def box_one(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    box_one = get_object_or_404(Box, id=1)
+    flashcards = FlashCard.objects.filter(box_id=box_one.id).get(pk=pk)
+
+    return render(request, "box_one.html", {"deck": deck, "flashcards": flashcards, "box_one": box_one})
+
+
+@ login_required
+def box_two(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    box_two = get_object_or_404(Box, id=2)
+    flashcards = FlashCard.objects.filter(box_id=box_two.id).get(pk=pk)
+
+    return render(request, "box_two.html", {"deck": deck, "flashcards": flashcards, "box_two": box_two})
+
+
+@ login_required
+def box_three(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    box_three = get_object_or_404(Box, id=3)
+    flashcards = FlashCard.objects.filter(box_id=box_three.id).get(pk=pk)
+
+    return render(request, "box_three.html", {"deck": deck, "flashcards": flashcards, "box_three": box_three})
+
+
+@ login_required
+def box_four(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    box_four = get_object_or_404(Box, id=4)
+    flashcards = FlashCard.objects.filter(box_id=box_four.id).get(pk=pk)
+
+    return render(request, "box_four.html", {"deck": deck, "flashcards": flashcards, "box_four": box_four})
+
+
+@ login_required
+def add_to_box_two(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcard = get_object_or_404(FlashCard, pk=pk)
+    if request.method == "GET":
+        correct = FlashCard
+    else:
+        correct = FlashCard(request.method == "POST")
+
+        FlashCard.objects.filter(pk=flashcard.pk).update(
+            box_id=2),
+        if hasattr(flashcard.get_next(), 'pk'):
+            return redirect(to="box_one", slug=deck.slug, pk=flashcard.get_next().pk)
+        else:
+            return redirect(to='choose_box', slug=deck.slug)
+
+
+@ login_required
+def add_to_box_three(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcard = get_object_or_404(FlashCard, pk=pk)
+    if request.method == "GET":
+        correct = FlashCard
+    else:
+        correct = FlashCard(request.method == "POST")
+
+        FlashCard.objects.filter(pk=flashcard.pk).update(
+            box_id=3),
+        if hasattr(flashcard.get_next(), 'pk'):
+            return redirect(to="box_two", slug=deck.slug, pk=flashcard.get_next().pk)
+        else:
+            return redirect(to='choose_box', slug=deck.slug)
+
+
+@ login_required
+def add_to_box_four(request, slug, pk):
+    deck = get_object_or_404(Deck, slug=slug)
+    flashcard = get_object_or_404(FlashCard, pk=pk)
+    if request.method == "GET":
+        correct = FlashCard
+    else:
+        correct = FlashCard(request.method == "POST")
+
+        FlashCard.objects.filter(pk=flashcard.pk).update(
+            box_id=4),
+        if hasattr(flashcard.get_next(), 'pk'):
+            return redirect(to="box_three", slug=deck.slug, pk=flashcard.get_next().pk)
+        else:
+            return redirect(to='choose_box', slug=deck.slug)

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h2 class="p1 f3 lh-copy"> Pick your Leitner Box: </h2>
+{% if flashcards_one.first.id %}
+<a href={% url 'box_one' deck.slug flashcards_one.first.id %}>Box 1 |</a>
+{% endif %}
+{% if flashcards_two.first.id %}
+<a href={% url 'box_two' deck.slug flashcards_two.first.id %}>Box 2 |</a>
+{% endif %}
+{% if flashcards_three.first.id %}
+<a href={% url 'box_three' deck.slug flashcards_three.first.id %}>Box 3 |</a>
+{% endif %}
+{% if flashcards_four.first.id %}
+<a href={% url 'box_four' deck.slug flashcards_four.first.id %}>Box 4 |</a>
+{% endif %}
+
+<a href={% url 'show_flashcards' slug=deck.slug %} class=>Show all Flashcards in Deck |</a>
+<a href={% url 'deck_list' %}> Back to Deck List |</a>
+
+{% endblock content %}

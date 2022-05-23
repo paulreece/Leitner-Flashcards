@@ -1,6 +1,6 @@
-# ShadowClan's Flashcards
+# Flashcards
 
-“ShadowClan’s Flashcards” is a web application that allows you to create and study flashcards. Users can create multiple decks and flashcards for each deck. Once created, users will have the opportunity to study their flashcards using the Leitner System.
+“Flashcards” is a web application that allows you to create and study flashcards. Users can create multiple decks and flashcards for each deck. Once created, users will have the opportunity to study their flashcards using the Leitner System.
 
 ## How to use it.
 
@@ -11,10 +11,6 @@ Once you have created a deck and its corresponding flashcards, you can click “
 ## More about the Leitner System.
 
 According to Wikipedia, The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in the 1970s. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. In this method, flashcards are sorted into groups according to how well the learner knows each one in Leitner's learning box. The learners try to recall the solution written on a flashcard. If they succeed, they send the card to the next group. If they fail, they send it back to the first group. Each succeeding group has a longer period before the learner is required to revisit the cards.
-
-## How to get this web application functioning for you.
-
-Unfortunately this web application has yet to be deployed. That means it is not available for public use. This web application was created as part of a class project to practice writing code in Django and Python. If you would like to try this for yourself, simply clone the repo and do a pipenv install of django, django-registration-redux, and environ. Once this is done, start your shell in pipenv and run python manage.py runserver.
 
 ## Project Planning
 
